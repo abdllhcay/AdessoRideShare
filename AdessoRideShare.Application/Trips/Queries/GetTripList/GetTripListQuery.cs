@@ -7,7 +7,7 @@ namespace AdessoRideShare.Application.Trips.Queries.GetTripList
 {
     public class GetTripListQuery : IRequest<IEnumerable<TripDto>>
     {
-        public City From { get; set; }
-        public City To { get; set; }
+        public City? From { get; set; }
+        public City? To { get; set; }
     }
 }
