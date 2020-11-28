@@ -17,6 +17,7 @@ namespace AdessoRideShare.Infrastructure.Data
         }
 
         public DbSet<Trip> Trips { get; set; }
+        public DbSet<City> Cities { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

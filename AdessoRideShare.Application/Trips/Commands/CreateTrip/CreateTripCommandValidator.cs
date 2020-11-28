@@ -6,10 +6,10 @@ namespace AdessoRideShare.Application.Trips.Commands.CreateTrip
     {
         public CreateTripCommandValidator()
         {
-            RuleFor(x => x.From)
+            RuleFor(x => x.OriginId)
                 .NotEmpty();
 
-            RuleFor(x => x.To)
+            RuleFor(x => x.DestinationId)
                 .NotEmpty();
 
             RuleFor(x => x.Date)

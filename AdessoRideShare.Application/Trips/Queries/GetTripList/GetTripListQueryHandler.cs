@@ -7,7 +7,6 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,19 +25,24 @@ namespace AdessoRideShare.Application.Trips.Queries.GetTripList
 
         public async Task<IEnumerable<TripDto>> Handle(GetTripListQuery request, CancellationToken cancellationToken)
         {
+            var origin = context.Cities.SingleOrDefault(e => e.Id == request.From);
+            var destination = context.Cities.SingleOrDefault(e => e.Id == request.To);
+
             var predicate = PredicateExpression.True<Trip>();
 
             if (request.From != null)
             {
-                predicate = predicate.And(e => e.From == request.From);
+                predicate = predicate.And(e => e.Origin.X <= origin.X && e.Origin.Y <= origin.Y);
             }
 
             if (request.To != null)
             {
-                predicate = predicate.And(e => e.To == request.To);
+                predicate = predicate.And(e => e.Destination.X <= destination.X && e.Destination.Y <= destination.Y);
             }
 
             var trips = await context.Trips.Where(predicate)
+                .Include(x => x.Destination)
+                .Include(x => x.Origin)
                 .ToListAsync();
 
             return mapper.Map<List<Trip>, List<TripDto>>(trips);

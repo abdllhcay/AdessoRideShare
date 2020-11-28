@@ -20,7 +20,7 @@ namespace AdessoRideShare.Application.Common.Exceptions
         }
 
         public NotFoundException(string name, object key)
-            : base($"Entity \"{name}\" with id \"{key}\" was not found.")
+            : base($"Entity '{name}' with id '{key}' was not found.")
         {
         }
     }

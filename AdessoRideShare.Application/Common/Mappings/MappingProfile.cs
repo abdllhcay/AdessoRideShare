@@ -1,4 +1,5 @@
-﻿using AdessoRideShare.Application.Trips.Commands.CreateTrip;
+﻿using AdessoRideShare.Application.Cities.Dto;
+using AdessoRideShare.Application.Trips.Commands.CreateTrip;
 using AdessoRideShare.Application.Trips.Commands.UpdateTrip;
 using AdessoRideShare.Application.Trips.Dto;
 using AdessoRideShare.Domain.Entities;
@@ -14,6 +15,8 @@ namespace AdessoRideShare.Application.Common.Mappings
                 .ForMember(d => d.Remaining, a => a.MapFrom(s => s.Capacity));
             CreateMap<UpdateTripRequest, Trip>();
             CreateMap<Trip, TripDto>();
+
+            CreateMap<City, CityDto>();
         }
     }
 }
