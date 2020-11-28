@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MediatR;
 
 namespace AdessoRideShare.Application.Trips.Commands.DraftTrip
 {
-    public class DraftTripCommand
+    public class DraftTripCommand : IRequest
     {
+        public int Id { get; set; }
+
+        public DraftTripCommand(int id)
+        {
+            this.Id = id;
+        }
     }
 }

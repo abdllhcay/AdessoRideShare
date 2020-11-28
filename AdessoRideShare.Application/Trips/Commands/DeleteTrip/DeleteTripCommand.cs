@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MediatR;
 
 namespace AdessoRideShare.Application.Trips.Commands.DeleteTrip
 {
-    public class DeleteTripCommand
+    public class DeleteTripCommand : IRequest
     {
+        public int Id { get; set; }
+
+        public DeleteTripCommand(int id)
+        {
+            this.Id = id;
+        }
     }
 }

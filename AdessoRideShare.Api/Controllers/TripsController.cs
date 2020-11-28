@@ -33,23 +33,23 @@ namespace AdessoRideShare.Api.Controllers
         }
 
         [HttpPut("{tripId}")]
-        public async Task<IActionResult> UpdateTrip(int tripId, [FromBody] UpdateTripCommand command)
+        public async Task<IActionResult> UpdateTrip(int tripId, [FromBody] UpdateTripRequest request)
         {
-            await Mediator.Send(command);
+            await Mediator.Send(new UpdateTripCommand(tripId, request));
             return Ok();
         }
 
         [HttpDelete("{tripId}")]
-        public async Task<IActionResult> DeleteTrip(int tripId, [FromBody] DeleteTripCommand command)
+        public async Task<IActionResult> DeleteTrip(int tripId)
         {
-            await Mediator.Send(command);
+            await Mediator.Send(new DeleteTripCommand(tripId));
             return Ok();
         }
 
-        [HttpPost("/draft/{tripId}")]
-        public async Task<IActionResult> DraftTrip(int tripId, [FromBody] DraftTripCommand command)
+        [HttpPost("{tripId}/draft")]
+        public async Task<IActionResult> DraftTrip(int tripId)
         {
-            await Mediator.Send(command);
+            await Mediator.Send(new DraftTripCommand(tripId));
             return Ok();
         }
     }
