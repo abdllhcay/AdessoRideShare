@@ -1,4 +1,6 @@
-﻿using AdessoRideShare.Application.Common.Interfaces;
+﻿using AdessoRideShare.Application.Common.Exceptions;
+using AdessoRideShare.Application.Common.Interfaces;
+using AdessoRideShare.Domain.Entities;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +23,12 @@ namespace AdessoRideShare.Application.Trips.Commands.UpdateTrip
         public async Task<Unit> Handle(UpdateTripCommand request, CancellationToken cancellationToken)
         {
             var trip = await context.Trips.SingleOrDefaultAsync(x => x.Id == request.Id);
+
+            if (trip == null)
+            {
+                throw new NotFoundException(nameof(Trip), request.Id);
+            }
+
             mapper.Map(request.UpdateTripRequest, trip);
 
             context.Trips.Update(trip);

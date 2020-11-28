@@ -2,6 +2,7 @@
 using System.Reflection;
 using AutoMapper;
 using MediatR;
+using AdessoRideShare.Application.Common.Behaviours;
 
 namespace AdessoRideShare.Application
 {
@@ -11,6 +12,7 @@ namespace AdessoRideShare.Application
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
 
             return services;
         }

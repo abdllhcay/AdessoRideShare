@@ -1,4 +1,6 @@
-﻿using AdessoRideShare.Application.Common.Interfaces;
+﻿using AdessoRideShare.Application.Common.Exceptions;
+using AdessoRideShare.Application.Common.Interfaces;
+using AdessoRideShare.Domain.Entities;
 using AdessoRideShare.Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +21,11 @@ namespace AdessoRideShare.Application.Trips.Commands.DraftTrip
         public async Task<Unit> Handle(DraftTripCommand request, CancellationToken cancellationToken)
         {
             var trip = await context.Trips.SingleOrDefaultAsync(x => x.Id == request.Id);
+
+            if (trip == null)
+            {
+                throw new NotFoundException(nameof(Trip), request.Id);
+            }
 
             trip.Status = Status.Draft;
 

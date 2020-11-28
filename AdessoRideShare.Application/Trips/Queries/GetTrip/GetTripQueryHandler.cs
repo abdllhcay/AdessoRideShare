@@ -1,4 +1,5 @@
-﻿using AdessoRideShare.Application.Common.Interfaces;
+﻿using AdessoRideShare.Application.Common.Exceptions;
+using AdessoRideShare.Application.Common.Interfaces;
 using AdessoRideShare.Application.Trips.Dto;
 using AdessoRideShare.Domain.Entities;
 using AutoMapper;
@@ -23,6 +24,11 @@ namespace AdessoRideShare.Application.Trips.Queries.GetTrip
         public async Task<TripDto> Handle(GetTripQuery request, CancellationToken cancellationToken)
         {
             var trip = await context.Trips.SingleOrDefaultAsync(x => x.Id == request.Id);
+
+            if (trip == null)
+            {
+                throw new NotFoundException(nameof(Trip), request.Id);
+            }
 
             return mapper.Map<Trip, TripDto>(trip);
         }
