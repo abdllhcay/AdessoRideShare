@@ -23,7 +23,10 @@ namespace AdessoRideShare.Application.Trips.Queries.GetTrip
 
         public async Task<TripDto> Handle(GetTripQuery request, CancellationToken cancellationToken)
         {
-            var trip = await context.Trips.SingleOrDefaultAsync(x => x.Id == request.Id);
+            var trip = await context.Trips
+                .Include(x => x.Destination)
+                .Include(x => x.Origin)
+                .SingleOrDefaultAsync(x => x.Id == request.Id);
 
             if (trip == null)
             {
