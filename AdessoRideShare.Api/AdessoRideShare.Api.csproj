@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AdessoRideShare.Application\AdessoRideShare.Application.csproj" />
+    <ProjectReference Include="..\AdessoRideShare.Infrastructure\AdessoRideShare.Infrastructure.csproj" />
   </ItemGroup>
 
 
