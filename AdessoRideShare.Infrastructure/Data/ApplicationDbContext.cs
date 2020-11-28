@@ -43,6 +43,8 @@ namespace AdessoRideShare.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Trip>().HasQueryFilter(u => u.Status == (int)Status.Active);
+
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             base.OnModelCreating(builder);
