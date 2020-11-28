@@ -1,5 +1,7 @@
+using AdessoRideShare.Api.Filters;
 using AdessoRideShare.Application;
 using AdessoRideShare.Infrastructure;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +23,10 @@ namespace AdessoRideShare.Api
         {
             services.AddApplication();
             services.AddInfrastructure(Configuration);
-            services.AddControllers();
+
+            services.AddControllers(options =>
+                options.Filters.Add<ApiExceptionFilterAttribute>())
+                    .AddFluentValidation();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
