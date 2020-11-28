@@ -10,7 +10,8 @@ namespace AdessoRideShare.Application.Common.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<CreateTripCommand, Trip>();
+            CreateMap<CreateTripCommand, Trip>()
+                .ForMember(d => d.Remaining, a => a.MapFrom(s => s.Capacity));
             CreateMap<UpdateTripRequest, Trip>();
             CreateMap<Trip, TripDto>();
         }

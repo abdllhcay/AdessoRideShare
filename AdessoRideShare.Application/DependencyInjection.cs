@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
+﻿using AdessoRideShare.Application.Common.Behaviours;
 using AutoMapper;
+using FluentValidation;
 using MediatR;
-using AdessoRideShare.Application.Common.Behaviours;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace AdessoRideShare.Application
 {
@@ -14,6 +15,7 @@ namespace AdessoRideShare.Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             return services;
         }

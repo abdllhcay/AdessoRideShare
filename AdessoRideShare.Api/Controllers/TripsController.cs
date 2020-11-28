@@ -1,6 +1,7 @@
 ﻿using AdessoRideShare.Application.Trips.Commands.CreateTrip;
 using AdessoRideShare.Application.Trips.Commands.DeleteTrip;
 using AdessoRideShare.Application.Trips.Commands.DraftTrip;
+using AdessoRideShare.Application.Trips.Commands.JoinTrip;
 using AdessoRideShare.Application.Trips.Commands.UpdateTrip;
 using AdessoRideShare.Application.Trips.Queries.GetTrip;
 using AdessoRideShare.Application.Trips.Queries.GetTripList;
@@ -50,6 +51,13 @@ namespace AdessoRideShare.Api.Controllers
         public async Task<IActionResult> DraftTrip(int tripId)
         {
             await Mediator.Send(new DraftTripCommand(tripId));
+            return Ok();
+        }
+
+        [HttpPost("{tripId}/join")]
+        public async Task<IActionResult> JoinTrip(int tripId)
+        {
+            await Mediator.Send(new JoinTripCommand(tripId));
             return Ok();
         }
     }

@@ -19,6 +19,7 @@ namespace AdessoRideShare.Api.Filters
             {
                 { typeof(ValidationException), HandleValidationException },
                 { typeof(NotFoundException), HandleNotFoundException },
+                { typeof(CustomException), HandleCustomException },
             };
         }
 
@@ -102,6 +103,21 @@ namespace AdessoRideShare.Api.Filters
             };
 
             context.Result = new NotFoundObjectResult(details);
+
+            context.ExceptionHandled = true;
+        }
+
+        private void HandleCustomException(ExceptionContext context)
+        {
+            var exception = context.Exception as CustomException;
+
+            var details = new ProblemDetails()
+            {
+                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+                Detail = exception.Message
+            };
+
+            context.Result = new BadRequestObjectResult(details);
 
             context.ExceptionHandled = true;
         }
