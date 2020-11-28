@@ -18,15 +18,15 @@ namespace AdessoRideShare.Api.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetTrip(GetTripQuery query)
+        [HttpGet("{tripId}")]
+        public async Task<IActionResult> GetTrip(int tripId)
         {
-            var response = await Mediator.Send(query);
+            var response = await Mediator.Send(new GetTripQuery(tripId));
             return Ok(response);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetTripList(GetTripListQuery query)
+        public async Task<IActionResult> GetTripList([FromQuery] GetTripListQuery query)
         {
             var response = await Mediator.Send(query);
             return Ok(response);

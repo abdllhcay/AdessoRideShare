@@ -2,7 +2,7 @@
 {
     public enum City
     {
-        Adana =1,
+        Adana = 1,
         Adıyaman,
         Afyonkarahisar,
         Ağrı,

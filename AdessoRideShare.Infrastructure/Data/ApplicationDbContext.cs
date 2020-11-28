@@ -1,6 +1,7 @@
 ﻿using AdessoRideShare.Application.Common.Interfaces;
 using AdessoRideShare.Domain.Common;
 using AdessoRideShare.Domain.Entities;
+using AdessoRideShare.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Reflection;
@@ -25,6 +26,8 @@ namespace AdessoRideShare.Infrastructure.Data
                 {
                     case EntityState.Added:
                         entry.Entity.CreatedOn = DateTime.Now;
+                        entry.Entity.ModifiedOn = DateTime.Now;
+                        entry.Entity.Status = Status.Active;
                         break;
 
                     case EntityState.Modified:

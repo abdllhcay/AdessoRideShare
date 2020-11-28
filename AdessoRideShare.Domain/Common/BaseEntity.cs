@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdessoRideShare.Domain.Enums;
+using System;
 
 namespace AdessoRideShare.Domain.Common
 {
@@ -7,6 +8,6 @@ namespace AdessoRideShare.Domain.Common
         public int Id { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime ModifiedOn { get; set; }
-        public int Status { get; set; }
+        public Status Status { get; set; }
     }
 }
