@@ -28,7 +28,7 @@ namespace AdessoRideShare.Application.Trips.Commands.JoinTrip
 
             if (trip.Remaining == 0)
             {
-                throw new CustomException("Capacity for this journey is full");
+                throw new CustomException("Capacity for this trip is full");
             }
 
             trip.Remaining--;
